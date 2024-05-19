@@ -1,6 +1,7 @@
-import { Component } from '@angular/core';
+import {Component, inject} from '@angular/core';
 import {KeyValuePipe, NgForOf} from "@angular/common";
 import {ButtonModule} from "primeng/button";
+import {VoteStore} from "../vote-store.service";
 
 @Component({
   selector: 'app-vote',
@@ -14,8 +15,11 @@ import {ButtonModule} from "primeng/button";
   styleUrl: './vote.component.scss'
 })
 export class VoteComponent {
-  title = 'tobis-app';
   protected readonly Participants = Participants;
+
+  protected voteStore = inject(VoteStore);
+  selectedParticipant: undefined;
+
 }
 
 export enum Participants {

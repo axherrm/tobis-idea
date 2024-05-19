@@ -1,5 +1,7 @@
-import {inject, Injectable} from '@angular/core';
+import {Injectable} from '@angular/core';
 import {HttpClient, HttpParams} from "@angular/common/http";
+
+import { environment } from '../environments/environment';
 
 @Injectable({
   providedIn: 'root'
@@ -11,11 +13,18 @@ export class RestClientService {
     this.http = http;
   }
 
-  async vote(username: string, vote: string) {
+  vote(username: string, vote: string) {
     const params = new HttpParams()
-      .set('username', username)
-      .set('vote', vote);
-    return this.http.post('TODO', {}, {params: params});
+      .set('voter', username)
+      .set('voted', vote);
+    const url = environment.api.baseURL + "vote";
+    return this.http.post(url, {}, {
+      params: params,
+      responseType: "json",
+      headers: {
+        "Content-Type": "application/x-www-form-urlencoded"
+      }
+    });
   }
 
   async fetchResults() {

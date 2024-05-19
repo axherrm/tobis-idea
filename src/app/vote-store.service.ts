@@ -26,9 +26,11 @@ export const VoteStore = signalStore(
         console.log(`User authenticated! ${store.username()}`)
       },
       vote(vote: string) {
-        restService.vote(vote, store.username()).then(() => patchState(store, {
-          vote: vote
-        }));
+        restService.vote(vote, store.username()).subscribe(res => {
+          patchState(store, {
+            vote: vote
+          })
+        });
       }
     }
   }),
