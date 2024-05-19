@@ -1,1 +1,5 @@
-<p>auth works!</p>
+<div class="flex flex-column justify-content-center column-gap-2">
+  <p>Willkommen zu Tobis <b>Der Dümmste fliegt</b> Vote System</p>
+  <input pInputText placeholder="Dein Name" [(ngModel)]="username">
+  <button pButton type="submit" (click)="login()" [disabled]="username.length < 3">Weiter</button>
+</div>
